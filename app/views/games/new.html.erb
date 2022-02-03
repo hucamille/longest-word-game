@@ -1,7 +1,17 @@
 <h1>New Game</h1>
-<div id="letter">
+<div id="letter" class="btn-medium">
   <% @letters.each do |letter| %>
     <%=letter%>
   <% end %>
 </div>
-<%# <% string = @letters.join(",")  %>
+<% string = @letters.join(",")  %>
+
+<form action="/longest_word_game/score" id="form" method="post">
+  <label for="word">Enter your word</label>
+  <input type="text" id="word" name="word" place-holder="Type your word here">
+  <input type="hidden" name="start_time" value=<%=Time.now%>>
+  <input type="hidden" name="letter" value=<%=string%>>
+
+  <input type="submit">
+</form>
+<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
