@@ -1,5 +1,18 @@
-<h1>So you have found the name ... <%= @word %></h1>
-<h2>Your score is: <%= @score %></h2>
-<p><%= @message %></p>
-
- <p><%= link_to 'Rejouer',longest_word_game_game_path %></p>
+<div class="container">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col-8">
+      <h1>Result</h1>
+      <% if @result == 1 %>
+        <p>Sorry but <strong><%= @word %></strong> can't be built out of <%= @letters.join(', ') %></p>
+      <% elsif  @result == 2 %>
+        <p>Sorry but <strong><%= @word %></strong> does not seem to be a valid English word... </p>
+      <% else %>
+        <p><strong>Congratulations!</strong> @word is a valid English word!</p>
+      <% end %>
+    </div>
+    <div class="col">
+    </div>
+  </div>
+  <p><%= link_to 'Rejouer',longest_word_game_path %></p>

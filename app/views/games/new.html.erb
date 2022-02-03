@@ -1,17 +1,31 @@
-<h1>New Game</h1>
-<div id="letter" class="btn-medium">
-  <% @letters.each do |letter| %>
-    <%=letter%>
-  <% end %>
-</div>
-<% string = @letters.join(",")  %>
-
-<form action="/longest_word_game/score" id="form" method="post">
-  <label for="word">Enter your word</label>
-  <input type="text" id="word" name="word" place-holder="Type your word here">
-  <input type="hidden" name="start_time" value=<%=Time.now%>>
-  <input type="hidden" name="letter" value=<%=string%>>
-
-  <input type="submit">
-</form>
-<%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+<div class="container">
+  <div class="row">
+    <div class="col">
+    </div>
+    <div class="col-8">
+      <h1>New game</h1>
+      <div class="flexbox">
+        <% letters = "" %>
+          <% @letters.each do |letter| %>
+            <% letters += letter %>
+              <div class="letter">
+                <%= letter %>
+              </div>
+              <% end %>
+      </div>
+      <br>
+      <p>What's the longest word you can find? </p>
+      <form action="/score" method="post" id="form">
+        <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+          <div class="input-group">
+            <input type="text" class="form-control" name="word">
+            <div class="input-group-append">
+              <button class="btn btn-primary" type="submit">Valider</button>
+            </div>
+            <input name="letters" type="hidden" value=<%= "#{letters}" %>>
+          </div>
+      </form>
+    </div>
+    <div class="col">
+    </div>
+  </div>
